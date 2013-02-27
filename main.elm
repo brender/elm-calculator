@@ -8,16 +8,19 @@ import Signal
 
 input1Floats = signalStringToFloat input1
 input1Strings = signalFloatToString input1Floats
-result = lift plainText input1Strings
-numberFields = above firstNumberField secondNumberField
+textResultSignal = lift plainText input1Strings
 
-main = lift (above numberFields) result
+-- Same as:
+-- flow down [ firstNumberField, secondNumberField ]
+numberFields = firstNumberField `above` secondNumberField
+
+main = lift (above numberFields) textResultSignal
 
 -- Signal Float -> Signal String
-signalFloatToString s = lift show s
+signalFloatToString sf = lift show sf
 
 -- Signal String -> Signal Float
-signalStringToFloat s = lift stringToFloat s
+signalStringToFloat ss = lift stringToFloat ss
 
 -- String -> Float
 stringToFloat s = maybe 0 id (readFloat s)
