@@ -1,5 +1,6 @@
-(firstNumberField, input) = Input.textField "First Number"
+(firstNumberField, input1) = Input.textField "First Number"
 
-main = lift (above firstNumberField) inputAsText
+(secondNumberField, input2) = Input.textField "Second Number"
 
-inputAsText = lift (text . toText) input
+main = flow down [ firstNumberField, secondNumberField ]
+
