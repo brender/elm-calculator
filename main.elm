@@ -6,6 +6,8 @@ import Signal
 (firstNumberField, input1) = textField "First Number"
 (secondNumberField, input2) = textField "Second Number"
 
+(operatorDropDown, selectedOperator) = dropDown [ ("+", (+)), ("-", (-)), ("•", (*)), ("÷", (/)) ]
+
 -- Input float signals
 input1Floats = signalStringToFloat input1
 input2Floats = signalStringToFloat input2
@@ -16,9 +18,9 @@ textResultSignal = lift plainText input1Plus2Strings
 
 -- Same as:
 -- flow down [ firstNumberField, secondNumberField ]
-numberFields = firstNumberField `above` secondNumberField
+fields = flow right [ firstNumberField, operatorDropDown, secondNumberField ]
 
-main = lift (above numberFields) textResultSignal
+main = lift (above fields) textResultSignal
 
 -- Signal Float -> Signal String
 signalFloatToString sf = lift show sf
