@@ -6,9 +6,13 @@ import Signal
 (firstNumberField, input1) = textField "First Number"
 (secondNumberField, input2) = textField "Second Number"
 
+-- Input float signals
 input1Floats = signalStringToFloat input1
-input1Strings = signalFloatToString input1Floats
-textResultSignal = lift plainText input1Strings
+input2Floats = signalStringToFloat input2
+
+-- Result signals
+input1Plus2Strings = signalFloatToString (lift2 (+) input1Floats input2Floats)
+textResultSignal = lift plainText input1Plus2Strings
 
 -- Same as:
 -- flow down [ firstNumberField, secondNumberField ]
