@@ -13,7 +13,8 @@ input1Floats = signalStringToFloat input1
 input2Floats = signalStringToFloat input2
 
 -- Result signals
-input1Plus2Strings = signalFloatToString (lift2 (+) input1Floats input2Floats)
+numberResults = selectedOperator ~ input1Floats ~ input2Floats
+input1Plus2Strings = signalFloatToString numberResults
 textResultSignal = lift plainText input1Plus2Strings
 
 -- Same as:
