@@ -1,3 +1,5 @@
+-- elm-server
+
 import Maybe
 import Graphics
 import Input
